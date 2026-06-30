@@ -46,7 +46,7 @@ local function applyWhiteScreen()
             frame.Size = UDim2.new(1, 0, 1, 0)
             frame.Position = UDim2.new(0, 0, 0, 0)
             frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-            frame.BackgroundTransparency = 0.45 -- โปร่งใส มองเห็นฉากหลังลาง ๆ ปรับได้ 0 (ทึบ) - 1 (ใสหมด)
+            frame.BackgroundTransparency = 0.6 -- โปร่งใส มองเห็นฉากหลังลาง ๆ ปรับได้ 0 (ทึบ) - 1 (ใสหมด)
             frame.BorderSizePixel = 0
             frame.ZIndex = 999999
             frame.Parent = whiteScreenGui
