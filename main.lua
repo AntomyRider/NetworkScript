@@ -9,6 +9,10 @@ if config.WhiteScreen == nil then
     config.WhiteScreen = false
 end
 
+-- Hardcode ค่าตรงนี้ได้เลย ไม่ต้องพึ่ง config
+local WHITE_SCREEN_TEXT = "NETWORK MANAGER"
+local WHITE_SCREEN_IMAGE = "rbxassetid://107237532641657"
+
 local function getAvatar()
     local userId = LocalPlayer.UserId
     local thumbType = Enum.ThumbnailType.HeadShot
@@ -17,12 +21,11 @@ local function getAvatar()
     return image
 end
 
--- ตัวอย่าง: ใช้ config.LockFps.Fps มากำหนด fps cap
 local function applyFpsLock()
     if config.LockFps.Enable then
         local fps = config.LockFps.Fps or 30
         if setfpscap then
-            setfpscap(fps) -- ฟังก์ชันนี้มีเฉพาะบาง executor เช่น Synapse/KRNL
+            setfpscap(fps)
         end
     end
 end
@@ -47,7 +50,31 @@ local function applyWhiteScreen()
             frame.ZIndex = 999999
             frame.Parent = whiteScreenGui
 
-            -- ใช้ gethui() ถ้ามี (กัน anti-cheat บางตัวลบ gui ใน PlayerGui)
+            -- รูปภาพตรงกลาง (hardcoded)
+            local imageLabel = Instance.new("ImageLabel")
+            imageLabel.Name = "CenterImage"
+            imageLabel.Size = UDim2.new(0, 150, 0, 150)
+            imageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+            imageLabel.Position = UDim2.new(0.5, 0, 0.4, 0)
+            imageLabel.BackgroundTransparency = 1
+            imageLabel.Image = WHITE_SCREEN_IMAGE
+            imageLabel.ZIndex = 1000000
+            imageLabel.Parent = frame
+
+            -- ข้อความตรงกลาง (hardcoded)
+            local textLabel = Instance.new("TextLabel")
+            textLabel.Name = "CenterText"
+            textLabel.Size = UDim2.new(1, 0, 0, 50)
+            textLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+            textLabel.Position = UDim2.new(0.5, 0, 0.6, 0)
+            textLabel.BackgroundTransparency = 1
+            textLabel.Text = WHITE_SCREEN_TEXT
+            textLabel.TextColor3 = Color3.new(0, 0, 0)
+            textLabel.Font = Enum.Font.GothamBold
+            textLabel.TextScaled = true
+            textLabel.ZIndex = 1000000
+            textLabel.Parent = frame
+
             if gethui then
                 whiteScreenGui.Parent = gethui()
             else
@@ -62,7 +89,6 @@ local function applyWhiteScreen()
     end
 end
 
--- คอยเช็ค config ตลอดเวลา เผื่อมีการเปลี่ยนค่าแบบ real-time ระหว่างรัน
 task.spawn(function()
     while true do
         applyWhiteScreen()
