@@ -10,7 +10,7 @@ if config.WhiteScreen == nil then
 end
 
 -- Hardcode ค่าตรงนี้ได้เลย ไม่ต้องพึ่ง config
-local WHITE_SCREEN_TEXT = "NETWORK MANAGER"
+local WHITE_SCREEN_TEXT = "NETWORK"
 local WHITE_SCREEN_IMAGE = "rbxassetid://107237532641657"
 
 local function getAvatar()
@@ -45,24 +45,25 @@ local function applyWhiteScreen()
             local frame = Instance.new("Frame")
             frame.Size = UDim2.new(1, 0, 1, 0)
             frame.Position = UDim2.new(0, 0, 0, 0)
-            frame.BackgroundColor3 = Color3.fromRGB(24, 26, 30) -- เทาเข้มเกือบดำ ไม่ดำสนิท
+            frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            frame.BackgroundTransparency = 0.45 -- โปร่งใส มองเห็นฉากหลังลาง ๆ ปรับได้ 0 (ทึบ) - 1 (ใสหมด)
             frame.BorderSizePixel = 0
             frame.ZIndex = 999999
             frame.Parent = whiteScreenGui
 
             -- กล่องกลางจอ ใช้รวม layout
             local container = Instance.new("Frame")
-            container.Size = UDim2.new(0, 320, 0, 220)
+            container.Size = UDim2.new(0, 320, 0, 290)
             container.AnchorPoint = Vector2.new(0.5, 0.5)
             container.Position = UDim2.new(0.5, 0, 0.45, 0)
             container.BackgroundTransparency = 1
             container.ZIndex = 1000000
             container.Parent = frame
 
-            -- รูปภาพตรงกลาง (ขยายใหญ่ขึ้น)
+            -- รูปภาพตรงกลาง (ขยายเป็น 200x200)
             local imageLabel = Instance.new("ImageLabel")
             imageLabel.Name = "CenterImage"
-            imageLabel.Size = UDim2.new(0, 130, 0, 130)
+            imageLabel.Size = UDim2.new(0, 200, 0, 200)
             imageLabel.AnchorPoint = Vector2.new(0.5, 0)
             imageLabel.Position = UDim2.new(0.5, 0, 0, 0)
             imageLabel.BackgroundTransparency = 1
@@ -75,7 +76,7 @@ local function applyWhiteScreen()
             textLabel.Name = "CenterText"
             textLabel.Size = UDim2.new(1, 0, 0, 45)
             textLabel.AnchorPoint = Vector2.new(0.5, 0)
-            textLabel.Position = UDim2.new(0.5, 0, 0, 145)
+            textLabel.Position = UDim2.new(0.5, 0, 0, 210)
             textLabel.BackgroundTransparency = 1
             textLabel.Text = WHITE_SCREEN_TEXT
             textLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
@@ -89,7 +90,7 @@ local function applyWhiteScreen()
             local underline = Instance.new("Frame")
             underline.Size = UDim2.new(0, 50, 0, 3)
             underline.AnchorPoint = Vector2.new(0.5, 0)
-            underline.Position = UDim2.new(0.5, 0, 0, 195)
+            underline.Position = UDim2.new(0.5, 0, 0, 260)
             underline.BackgroundColor3 = Color3.fromRGB(0, 162, 255)
             underline.BorderSizePixel = 0
             underline.ZIndex = 1000001
