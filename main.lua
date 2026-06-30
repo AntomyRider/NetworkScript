@@ -9,7 +9,8 @@ if config.WhiteScreen == nil then
     config.WhiteScreen = false
 end
 
--- Hardcode ค่ารูปตรงนี้ได้เลย
+-- Hardcode ค่าตรงนี้ได้เลย
+local WHITE_SCREEN_TEXT = "NETWORK"
 local WHITE_SCREEN_IMAGE = "rbxassetid://107237532641657"
 
 local function getAvatar()
@@ -50,16 +51,40 @@ local function applyWhiteScreen()
             frame.ZIndex = 999999
             frame.Parent = whiteScreenGui
 
-            -- รูปภาพตรงกลางจอ (200x200)
+            -- กล่องกลางจอ รวม layout
+            local container = Instance.new("Frame")
+            container.Size = UDim2.new(0, 360, 0, 360)
+            container.AnchorPoint = Vector2.new(0.5, 0.5)
+            container.Position = UDim2.new(0.5, 0, 0.45, 0)
+            container.BackgroundTransparency = 1
+            container.ZIndex = 1000000
+            container.Parent = frame
+
+            -- รูปภาพตรงกลาง (ขยายเป็น 300x300)
             local imageLabel = Instance.new("ImageLabel")
             imageLabel.Name = "CenterImage"
-            imageLabel.Size = UDim2.new(0, 200, 0, 200)
-            imageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
-            imageLabel.Position = UDim2.new(0.5, 0, 0.45, 0)
+            imageLabel.Size = UDim2.new(0, 300, 0, 300)
+            imageLabel.AnchorPoint = Vector2.new(0.5, 0)
+            imageLabel.Position = UDim2.new(0.5, 0, 0, 0)
             imageLabel.BackgroundTransparency = 1
             imageLabel.Image = WHITE_SCREEN_IMAGE
             imageLabel.ZIndex = 1000001
-            imageLabel.Parent = frame
+            imageLabel.Parent = container
+
+            -- ข้อความสีฟ้า
+            local textLabel = Instance.new("TextLabel")
+            textLabel.Name = "CenterText"
+            textLabel.Size = UDim2.new(1, 0, 0, 50)
+            textLabel.AnchorPoint = Vector2.new(0.5, 0)
+            textLabel.Position = UDim2.new(0.5, 0, 0, 305)
+            textLabel.BackgroundTransparency = 1
+            textLabel.Text = WHITE_SCREEN_TEXT
+            textLabel.TextColor3 = Color3.fromRGB(0, 162, 255)
+            textLabel.Font = Enum.Font.FredokaOne
+            textLabel.TextSize = 32
+            textLabel.TextScaled = false
+            textLabel.ZIndex = 1000001
+            textLabel.Parent = container
 
             if gethui then
                 whiteScreenGui.Parent = gethui()
