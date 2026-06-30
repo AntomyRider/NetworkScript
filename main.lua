@@ -76,7 +76,7 @@ local function applyWhiteScreen()
             textLabel.Name = "CenterText"
             textLabel.Size = UDim2.new(1, 0, 0, 50)
             textLabel.AnchorPoint = Vector2.new(0.5, 0)
-            textLabel.Position = UDim2.new(0.5, 0, 0, 260)
+            textLabel.Position = UDim2.new(0.5, 0, 0, 230)
             textLabel.BackgroundTransparency = 1
             textLabel.Text = WHITE_SCREEN_TEXT
             textLabel.TextColor3 = Color3.fromRGB(0, 162, 255)
