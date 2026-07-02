@@ -1,6 +1,5 @@
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
-local MarketplaceService = game:GetService("MarketplaceService") -- เพิ่ม Service ดึงชื่อแมพ
 local LocalPlayer = Players.LocalPlayer
 
 -- ดึง config จาก global, ใส่ default กันพัง
@@ -233,13 +232,6 @@ end)
 
 applyFpsLock()
 
--- ดึงชื่อแมพผ่าน PlaceId แค่ครั้งเดียวตอนเริ่มเกม
-local mapName = "Unknown"
-pcall(function()
-    local productInfo = MarketplaceService:GetProductInfo(game.PlaceId)
-    mapName = productInfo.Name
-end)
-
 while true do
     local name = LocalPlayer.Name
     local jobId = game.JobId
@@ -252,7 +244,6 @@ while true do
             .. "&jobid=" .. jobId
             .. "&status=" .. status
             .. "&avatar=" .. HttpService:UrlEncode(avatar)
-            .. "&map=" .. HttpService:UrlEncode(mapName) -- แนบชื่อแมพไปด้วย
         game:HttpGet(url)
     end)
 
