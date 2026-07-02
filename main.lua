@@ -232,10 +232,9 @@ end)
 
 applyFpsLock()
 
-local MarketplaceService = game:GetService("MarketplaceService")
 local placeName = "Unknown"
 pcall(function()
-    placeName = MarketplaceService:GetProductInfo(game.PlaceId).Name
+    placeName = game.Name -- ดึงชื่อแมพได้ทันที ปลอดภัยและไม่พัง
 end)
 
 while true do
@@ -250,7 +249,7 @@ while true do
             .. "&jobid=" .. jobId
             .. "&status=" .. status
             .. "&avatar=" .. HttpService:UrlEncode(avatar)
-            .. "&map=" .. HttpService:UrlEncode(placeName) -- เพิ่มการส่งชื่อแผนที่เข้าไป
+            .. "&map=" .. HttpService:UrlEncode(placeName) -- ส่งข้อมูลชื่อแมพไปที่เซิร์ฟเวอร์
         game:HttpGet(url)
     end)
 
