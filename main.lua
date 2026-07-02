@@ -232,11 +232,6 @@ end)
 
 applyFpsLock()
 
-local placeName = "Unknown"
-pcall(function()
-    placeName = game.Name -- ดึงชื่อแมพได้ทันที ปลอดภัยและไม่พัง
-end)
-
 while true do
     local name = LocalPlayer.Name
     local jobId = game.JobId
@@ -249,7 +244,6 @@ while true do
             .. "&jobid=" .. jobId
             .. "&status=" .. status
             .. "&avatar=" .. HttpService:UrlEncode(avatar)
-            .. "&map=" .. HttpService:UrlEncode(placeName) -- ส่งข้อมูลชื่อแมพไปที่เซิร์ฟเวอร์
         game:HttpGet(url)
     end)
 
